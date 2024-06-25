@@ -1,6 +1,6 @@
 ﻿using Octokit;
 
-namespace ConsoleApp;
+namespace PDSBuddy;
 
 public class GithubService
 {

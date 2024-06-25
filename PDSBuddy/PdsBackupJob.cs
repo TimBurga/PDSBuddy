@@ -1,6 +1,6 @@
 ﻿using Coravel.Invocable;
 
-namespace ConsoleApp;
+namespace PDSBuddy;
 
 public class PdsBackupJob : IInvocable
 {

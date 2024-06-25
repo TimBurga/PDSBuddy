@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp;
+﻿namespace PDSBuddy;
 
 public class PdsClient
 {
