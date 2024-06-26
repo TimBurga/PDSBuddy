@@ -17,6 +17,8 @@ builder.Services.AddHttpClient<PdsClient>(config =>
     config.BaseAddress = Config.PDS_URL;
 });
 
+builder.Services.AddLogging(x => x.AddSimpleConsole());
+
 var app = builder.Build();
 
 app.Services.UseScheduler(scheduler => 
@@ -27,8 +29,6 @@ app.Services.UseScheduler(scheduler =>
 
 try
 {
-    app.ImportConfig();
-
     app.Run();
 }
 catch (Exception ex)

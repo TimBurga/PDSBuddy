@@ -4,6 +4,11 @@ namespace PDSBuddy;
 
 public class Config
 {
+    public Config()
+    {
+        ImportConfig();
+    }
+
     public static Uri PDS_URL { get; set; }
     public static string DID { get; set; }
     public static string GITHUB_REPO { get; set; }
@@ -16,11 +21,8 @@ public class Config
     public static int NOTIFICATIONS_SERVER_PORT { get; internal set; }
     public static string NOTIFICATIONS_SERVER_USER { get; internal set; }
     public static string NOTIFICATIONS_SERVER_PASSWORD { get; internal set; }
-}
 
-public static class HostExtensions
-{
-    public static void ImportConfig(this IHost app)
+    public static void ImportConfig()
     {
         if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("PDS_URL")))
         {
