@@ -37,7 +37,7 @@ public static class HostExtensions
             throw new ArgumentNullException(nameof(Config.GITHUB_REPO), "Environment variable GITHUB_REPO not found");
         }
 
-        if (string.IsNullOrEmpty(Config.GITHUB_TOKEN))
+        if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("GITHUB_TOKEN")))
         {
             throw new ArgumentNullException(nameof(Config.GITHUB_TOKEN), "Environment variable GITHUB_TOKEN not found");
         }
