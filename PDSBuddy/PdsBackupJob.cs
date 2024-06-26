@@ -1,4 +1,5 @@
 ﻿using Coravel.Invocable;
+using Microsoft.Extensions.Logging;
 
 namespace PDSBuddy;
 
@@ -6,25 +7,28 @@ public class PdsBackupJob : IInvocable
 {
     private readonly PdsClient _pdsClient;
     private readonly GithubService _github;
+    private readonly ILogger _logger;
 
-    public PdsBackupJob(PdsClient pdsClient, GithubService github)
+    public PdsBackupJob(PdsClient pdsClient, GithubService github, ILogger logger)
     {
         _pdsClient = pdsClient;
         _github = github;
+        _logger = logger;
     }
 
     public async Task Invoke()
     {
-        var content = await _pdsClient.GetRepoBytes(Config.DID);
+        try
+        {
+            _logger.LogInformation("Running PDS backup job");
+            var content = await _pdsClient.GetRepoBytes(Config.DID);
 
-        await _github.SaveBackup(content);
+            await _github.SaveBackup(content);
+            _logger.LogInformation("Completed PDS backup job");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred during PDS backup job");
+        }
     }
-}
-
-public class Config
-{
-    public static Uri PDS_URL = new Uri(Environment.GetEnvironmentVariable("PDS_URL"));
-    public static string DID = Environment.GetEnvironmentVariable("DID");
-    public static string GITHUB_REPO = Environment.GetEnvironmentVariable("GITHUB_REPO") ?? "PDSBackup";
-    public static string GITHUB_TOKEN = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
 }
