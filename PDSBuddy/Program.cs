@@ -17,7 +17,7 @@ builder.Services.AddHttpClient<PdsClient>(config =>
     config.BaseAddress = Config.PDS_URL;
 });
 
-builder.Services.AddLogging(x => x.AddSimpleConsole());
+builder.Services.AddLogging(x => x.AddSimpleConsole().SetMinimumLevel(LogLevel.Information));
 
 var app = builder.Build();
 

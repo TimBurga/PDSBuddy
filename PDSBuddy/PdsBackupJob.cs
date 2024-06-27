@@ -10,7 +10,7 @@ public class PdsBackupJob : IInvocable
     private readonly ILogger _logger;
     private readonly MailService _mail;
 
-    public PdsBackupJob(PdsClient pdsClient, GithubService github, ILogger logger, MailService mail)
+    public PdsBackupJob(PdsClient pdsClient, GithubService github, ILogger<PdsBackupJob> logger, MailService mail)
     {
         _pdsClient = pdsClient;
         _github = github;
