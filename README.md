@@ -9,7 +9,7 @@ Initially backups will only contain posts, likes, and follows. They will NOT inc
 Notes:
 * [Look up](https://internect.info/) your DID
 * [Create](https://github.com/settings/tokens) a Github access token
-* Set NOTIFICATIONS_ENABLED to `false` to disable all emails
+* Set NOTIFICATIONS_LEVEL to `Off` to disable all emails
 * Notifications settings for Gmail are included below but you can use any SMTP server
 * [Create](https://myaccount.google.com/apppasswords) a Gmail app-specific password 
 ```
@@ -22,7 +22,7 @@ pdsbuddy:
     - DID=your-full-did (eg did:plc:c54hcflqn6rv53qumfnxc5mj) 
     - GITHUB_REPO=repo-name 
     - GITHUB_TOKEN=github-access-token
-    - NOTIFICATIONS_ENABLED=true 
+    - NOTIFICATIONS_LEVEL=[Off|Errors|All]
     - NOTIFICATIONS_FROM_ADDRESS=user@gmail.com 
     - NOTIFICATIONS_TO_ADDRESS=user@gmail.com 
     - NOTIFICATIONS_SUBJECT=Message from PDSBuddy 
