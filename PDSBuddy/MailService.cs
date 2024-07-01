@@ -5,9 +5,17 @@ namespace PDSBuddy;
 
 public class MailService
 {
+    public async Task SendError(string message)
+    {
+        if (Config.NOTIFICATIONS_LEVEL >= NotificationsLevel.Errors)
+        {
+            await Send(message);
+        }
+    }
+
     public async Task Send(string message)
     {
-        if (!Config.NOTIFICATIONS_ENABLED)
+        if (Config.NOTIFICATIONS_LEVEL == NotificationsLevel.Off)
         {
             return;
         }

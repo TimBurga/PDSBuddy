@@ -20,30 +20,22 @@ public class GithubService
 
     public async Task SaveBackup(byte[] backupFile)
     {
-        try
-        {
-            var existing = await _client.Repository.Content.GetAllContents(await GetUserName(), Config.GITHUB_REPO, BackupFilename);
+        var existing = await _client.Repository.Content.GetAllContents(await GetUserName(), Config.GITHUB_REPO, BackupFilename);
 
-            var encoded = Convert.ToBase64String(backupFile);
-            if (!existing.Any())
-            {
-                await CreateBackup(encoded);
-            }
-            else
-            {
-                await UpdateBackup(encoded, existing.First().Sha);
-            }
-        }
-        catch (Exception ex)
+        var encoded = Convert.ToBase64String(backupFile);
+        if (!existing.Any())
         {
-            Console.WriteLine(ex);
-            throw;
+            await CreateBackup(encoded);
+        }
+        else
+        {
+            await UpdateBackup(encoded, existing.First().Sha);
         }
     }
 
     private async Task CreateBackup(string encoded)
     {
-        var request = new CreateFileRequest($"{CommitMessage} {DateTime.Today.ToShortDateString()}", encoded, true);
+        var request = new CreateFileRequest($"{CommitMessage} {DateTime.Today.ToShortDateString()}", encoded, false);
         await _client.Repository.Content.CreateFile(await GetUserName(), Config.GITHUB_REPO, BackupFilename, request);
     }
 

@@ -3,6 +3,7 @@ using Coravel;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PDSBuddy.Jobs;
 
 var builder = Host.CreateApplicationBuilder();
 
@@ -38,7 +39,7 @@ catch (Exception ex)
     logger.LogCritical(ex, "Fatal error - unable to recover");
 
     var mailService = app.Services.GetRequiredService<MailService>();
-    await mailService.Send(ex.Message);
+    await mailService.SendError(ex.Message);
 
     await app.StopAsync();
 }

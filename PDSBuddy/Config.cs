@@ -6,7 +6,7 @@ public class Config
     public static string DID = Environment.GetEnvironmentVariable("DID");
     public static string GITHUB_REPO = Environment.GetEnvironmentVariable("GITHUB_REPO");
     public static string GITHUB_TOKEN = Environment.GetEnvironmentVariable("GITHUB_TOKEN");
-    public static bool NOTIFICATIONS_ENABLED = bool.Parse(Environment.GetEnvironmentVariable("NOTIFICATIONS_ENABLED"));
+    public static NotificationsLevel NOTIFICATIONS_LEVEL = Enum.Parse<NotificationsLevel>(Environment.GetEnvironmentVariable("NOTIFICATIONS_LEVEL"));
     public static string NOTIFICATIONS_FROM_ADDRESS = Environment.GetEnvironmentVariable("NOTIFICATIONS_FROM_ADDRESS");
     public static string NOTIFICATIONS_TO_ADDRESS = Environment.GetEnvironmentVariable("NOTIFICATIONS_TO_ADDRESS");
     public static string NOTIFICATIONS_SUBJECT = Environment.GetEnvironmentVariable("NOTIFICATIONS_SUBJECT");

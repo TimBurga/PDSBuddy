@@ -1,7 +1,7 @@
 ﻿using Coravel.Invocable;
 using Microsoft.Extensions.Logging;
 
-namespace PDSBuddy;
+namespace PDSBuddy.Jobs;
 
 public class PdsBackupJob : IInvocable
 {
@@ -32,7 +32,7 @@ public class PdsBackupJob : IInvocable
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error occurred during PDS backup job");
-            await _mail.Send(ex.Message);
+            await _mail.SendError(ex.Message);
         }
     }
 }
