@@ -1,4 +1,4 @@
-﻿namespace PDSBuddy;
+﻿namespace PDSBuddy.Models;
 
 public enum NotificationsLevel
 {

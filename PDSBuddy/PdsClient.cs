@@ -1,4 +1,7 @@
-﻿namespace PDSBuddy;
+﻿using System.Net.Http.Json;
+using PDSBuddy.Models;
+
+namespace PDSBuddy;
 
 public class PdsClient
 {
@@ -17,4 +20,14 @@ public class PdsClient
 
         return await response.Content.ReadAsByteArrayAsync();
     }
+
+    public async Task<BlobList> GetBlobList(string did, string cursor)
+    {
+        var response = await _client.GetAsync($"xrpc/com.atproto.sync.listBlobs?did={did}&cursor={cursor}");
+
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadFromJsonAsync<BlobList>();
+    }
 }
+    

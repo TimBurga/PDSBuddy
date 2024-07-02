@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PDSBuddy.Jobs;
+using Microsoft.Extensions.Configuration;
 
 var builder = Host.CreateApplicationBuilder();
 
@@ -13,9 +14,14 @@ builder.Services.AddTransient<PdsBackupJob>();
 builder.Services.AddTransient<GithubService>();
 builder.Services.AddTransient<MailService>();
 
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", true)
+    .AddEnvironmentVariables()
+    .Build();
+
 builder.Services.AddHttpClient<PdsClient>(config =>
 {
-    config.BaseAddress = Config.PDS_URL;
+    config.BaseAddress = configuration.GetValue<Uri>("PDS_URL");
 });
 
 builder.Services.AddLogging(x => x.AddSimpleConsole().SetMinimumLevel(LogLevel.Information));
