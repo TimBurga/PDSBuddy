@@ -1,4 +1,7 @@
 # PDSBuddy
+
+## OBSOLETE - use [this template](https://github.com/FiloSottile/bsky-backup-template) instead
+
 A companion container for self-hosted ATProto PDS instances
 
 This first version of PDSBuddy does one thing: PDS backup. It generates a .car file from your PDS and stores it in a GitHub repo. That's it.
